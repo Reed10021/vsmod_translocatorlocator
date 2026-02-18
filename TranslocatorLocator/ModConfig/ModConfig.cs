@@ -1,5 +1,5 @@
 #pragma warning disable IDE1006 // Naming Styles
-namespace TranslocatorLocator.ModConfig
+namespace TranslocatorLocatorRedux.ModConfig
 {
     using System.Collections.Generic;
     using System.IO;

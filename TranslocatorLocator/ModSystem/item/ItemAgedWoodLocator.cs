@@ -1,6 +1,6 @@
-namespace TranslocatorLocator.ModSystem.Item
+namespace TranslocatorLocatorRedux.ModSystem.Item
 {
-    using TranslocatorLocator.ModConfig;
+    using TranslocatorLocatorRedux.ModConfig;
     using Vintagestory.API.Client;
     using Vintagestory.API.Common;
     using Vintagestory.API.Config;

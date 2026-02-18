@@ -1,7 +1,7 @@
-namespace TranslocatorLocator.ModSystem.Item
+namespace TranslocatorLocatorRedux.ModSystem.Item
 {
     using System.Globalization;
-    using TranslocatorLocator.ModConfig;
+    using TranslocatorLocatorRedux.ModConfig;
     using Vintagestory.API.Client;
     using Vintagestory.API.Common;
     using Vintagestory.API.Config;
@@ -49,7 +49,6 @@ namespace TranslocatorLocator.ModSystem.Item
 
         protected override void PrintCubeSearchResults(int count, int range, ICoreClientAPI capi)
         {
-            //var noOfTLs = (count > 0) ? "" + count : Lang.Get("translocatorlocatorredux:translocator_no");
             var message = count switch
             {
                 0 => Lang.Get("translocatorlocatorredux:translocator_cubenofound"),

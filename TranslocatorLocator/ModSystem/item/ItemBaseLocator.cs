@@ -1,4 +1,4 @@
-namespace TranslocatorLocator.ModSystem.Item
+namespace TranslocatorLocatorRedux.ModSystem.Item
 {
     using System;
     using System.Text;
@@ -11,7 +11,7 @@ namespace TranslocatorLocator.ModSystem.Item
     using Vintagestory.API.Util;
 #pragma warning disable IDE0005
     using System.Linq;
-    using TranslocatorLocator.ModConfig;
+    using TranslocatorLocatorRedux.ModConfig;
 #pragma warning restore IDE0005
 
     public abstract class ItemBaseLocator : Item
@@ -35,7 +35,6 @@ namespace TranslocatorLocator.ModSystem.Item
 
         public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
         {
-
             if (byEntity is EntityPlayer)
             {
                 if (blockSel != null && firstEvent)
@@ -44,7 +43,7 @@ namespace TranslocatorLocator.ModSystem.Item
                     var cost = 0;
                     var player = byEntity.World.PlayerByUid((byEntity as EntityPlayer).PlayerUID);
                     var toolMode = this.GetToolMode(slot, player, blockSel);
-                    var modConfig = ModConfig.Current;
+                    var modConfig = ModConfig.Current ?? new ModConfig(); // Use default values if we couldn't load the config file
 
                     switch (toolMode)
                     {
@@ -225,7 +224,10 @@ namespace TranslocatorLocator.ModSystem.Item
             this.PrintConeSearchResults(count, range, blockSel.Face.Index, capi);
             PlaySound(count > 0, byEntity);
 
-            ApplyDurabilityDamageClient(durabilityDamage, slot, byEntity);
+            if (capi != null && capi.IsSinglePlayer)
+            {
+                ApplyDurabilityDamageClient(durabilityDamage, slot, byEntity);
+            }
         }
 
         private int SearchCubeArea(IWorldAccessor world, BlockSelection blockSel, int range)
@@ -261,7 +263,10 @@ namespace TranslocatorLocator.ModSystem.Item
             this.PrintCubeSearchResults(count, range, capi);
             PlaySound(count > 0, byEntity);
 
-            ApplyDurabilityDamageClient(durabilityDamage, slot, byEntity);
+            if (capi != null && capi.IsSinglePlayer)
+            {
+                ApplyDurabilityDamageClient(durabilityDamage, slot, byEntity);
+            }
         }
 
         private static void ApplyDurabilityDamageServer(int durabilityDamage, ItemSlot slot, EntityAgent byEntity)
