@@ -1,4 +1,5 @@
 #pragma warning disable IDE1006 // Naming Styles
+#pragma warning disable CA1051 // Visible Instance Fields
 namespace TranslocatorLocatorRedux.ModSystem
 {
     using TranslocatorLocatorRedux.ModConfig;
@@ -52,10 +53,8 @@ namespace TranslocatorLocatorRedux.ModSystem
             base.StartServerSide(api);
             this.sapi = api;
 
-            // Server is authoritative: load config from disk.
             ModConfig.Load(api);
 
-            // Register channel + packets
             this.serverChannel = api.Network.RegisterChannel(ChannelName)
                 .RegisterMessageType<ConfigSyncPacket>()
                 .RegisterMessageType<ConfigRequestPacket>()
@@ -100,14 +99,12 @@ namespace TranslocatorLocatorRedux.ModSystem
             base.StartClientSide(api);
             //this.spapi = api;
 
-            // Register channel + packets
             this.clientChannel = api.Network.RegisterChannel(ChannelName)
                 .RegisterMessageType<ConfigSyncPacket>()
                 .RegisterMessageType<ConfigRequestPacket>()
                 .SetMessageHandler<ConfigSyncPacket>(this.OnConfigSyncFromServer);
 
             // Request config once we're in-world.
-            // (Server will also proactively send on PlayerNowPlaying, but this makes the sync resilient.)
             api.Event.LevelFinalize += () =>
             {
                 ModConfig.Current ??= new ModConfig();

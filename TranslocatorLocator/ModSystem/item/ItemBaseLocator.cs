@@ -18,8 +18,12 @@ namespace TranslocatorLocatorRedux.ModSystem.Item
     {
         private SkillItem[] toolModes;
 
+        protected abstract int GetSmallConeRange(ModConfig modConfig);
+        protected abstract int GetSmallConeCost(ModConfig modConfig);
         protected abstract int GetConeRange(ModConfig modConfig);
         protected abstract int GetConeCost(ModConfig modConfig);
+        protected abstract int GetExtraSmallCubeRange(ModConfig modConfig);
+        protected abstract int GetExtraSmallCubeCost(ModConfig modConfig);
         protected abstract int GetSmallCubeRange(ModConfig modConfig);
         protected abstract int GetSmallCubeCost(ModConfig modConfig);
         protected abstract int GetMediumCubeRange(ModConfig modConfig);
@@ -48,18 +52,26 @@ namespace TranslocatorLocatorRedux.ModSystem.Item
                     switch (toolMode)
                     {
                         case 0:
+                            range = this.GetSmallConeRange(modConfig);
+                            cost = this.GetSmallConeCost(modConfig);
+                            break;
+                        case 1:
                             range = this.GetConeRange(modConfig);
                             cost = this.GetConeCost(modConfig);
                             break;
-                        case 1:
+                        case 2:
+                            range = this.GetExtraSmallCubeRange(modConfig);
+                            cost = this.GetExtraSmallCubeCost(modConfig);
+                            break;
+                        case 3:
                             range = this.GetSmallCubeRange(modConfig);
                             cost = this.GetSmallCubeCost(modConfig);
                             break;
-                        case 2:
+                        case 4:
                             range = this.GetMediumCubeRange(modConfig);
                             cost = this.GetMediumCubeCost(modConfig);
                             break;
-                        case 3:
+                        case 5:
                             range = this.GetLargeCubeRange(modConfig);
                             cost = this.GetLargeCubeCost(modConfig);
                             break;
@@ -76,11 +88,13 @@ namespace TranslocatorLocatorRedux.ModSystem.Item
                         switch (toolMode)
                         {
                             case 0:
+                            case 1:
                                 this.ExecuteConeSearch(range, cost, slot, byEntity, blockSel);
                                 break;
-                            case 1:
                             case 2:
                             case 3:
+                            case 4:
+                            case 5:
                                 this.ExecuteCubeSearch(range, cost, slot, byEntity, blockSel);
                                 break;
                             default:
@@ -101,11 +115,13 @@ namespace TranslocatorLocatorRedux.ModSystem.Item
             {
                 SkillItem[] modes;
 
-                modes = new SkillItem[4];
-                modes[0] = new SkillItem() { Code = new AssetLocation("cone"), Name = Lang.Get("translocatorlocatorredux:directionalmode") };
-                modes[1] = new SkillItem() { Code = new AssetLocation("smallcube"), Name = Lang.Get("translocatorlocatorredux:smallcubemode") };
-                modes[2] = new SkillItem() { Code = new AssetLocation("mediumcube"), Name = Lang.Get("translocatorlocatorredux:mediumcubemode") };
-                modes[3] = new SkillItem() { Code = new AssetLocation("largecube"), Name = Lang.Get("translocatorlocatorredux:largecubemode") };
+                modes = new SkillItem[6];
+                modes[0] = new SkillItem() { Code = new AssetLocation("smallcone"), Name = Lang.Get("translocatorlocatorredux:smalldirectionalmode") };
+                modes[1] = new SkillItem() { Code = new AssetLocation("cone"), Name = Lang.Get("translocatorlocatorredux:directionalmode") };
+                modes[2] = new SkillItem() { Code = new AssetLocation("extrasmallcube"), Name = Lang.Get("translocatorlocatorredux:extrasmallcubemode") };
+                modes[3] = new SkillItem() { Code = new AssetLocation("smallcube"), Name = Lang.Get("translocatorlocatorredux:smallcubemode") };
+                modes[4] = new SkillItem() { Code = new AssetLocation("mediumcube"), Name = Lang.Get("translocatorlocatorredux:mediumcubemode") };
+                modes[5] = new SkillItem() { Code = new AssetLocation("largecube"), Name = Lang.Get("translocatorlocatorredux:largecubemode") };
 
                 if (api is ICoreClientAPI capi)
                 {
@@ -113,6 +129,8 @@ namespace TranslocatorLocatorRedux.ModSystem.Item
                     modes[1].WithIcon(capi, (cr, x, y, w, h, c) => DrawIcons(cr, x, y, w, h, c, 1));
                     modes[2].WithIcon(capi, (cr, x, y, w, h, c) => DrawIcons(cr, x, y, w, h, c, 2));
                     modes[3].WithIcon(capi, (cr, x, y, w, h, c) => DrawIcons(cr, x, y, w, h, c, 3));
+                    modes[4].WithIcon(capi, (cr, x, y, w, h, c) => DrawIcons(cr, x, y, w, h, c, 4));
+                    modes[5].WithIcon(capi, (cr, x, y, w, h, c) => DrawIcons(cr, x, y, w, h, c, 5));
                 }
 
                 return modes;
@@ -341,21 +359,32 @@ namespace TranslocatorLocatorRedux.ModSystem.Item
             switch (toolMode)
             {
                 case 0:
+                    cr.MoveTo(16, 24);
+                    cr.LineTo(32, 15);
+                    cr.LineTo(32, 33);
+                    cr.LineTo(16, 24);
+                    cr.Fill();
+                    break;
+                case 1:
                     cr.MoveTo(11, 24);
                     cr.LineTo(37, 10);
                     cr.LineTo(37, 38);
                     cr.LineTo(11, 24);
                     cr.Fill();
                     break;
-                case 1:
-                    cr.Rectangle(16, 16, 16, 16);
-                    cr.Fill();
-                    break;
                 case 2:
-                    cr.Rectangle(10, 10, 28, 28);
+                    cr.Rectangle(20, 20, 8, 8);
                     cr.Fill();
                     break;
                 case 3:
+                    cr.Rectangle(16, 16, 16, 16);
+                    cr.Fill();
+                    break;
+                case 4:
+                    cr.Rectangle(10, 10, 28, 28);
+                    cr.Fill();
+                    break;
+                case 5:
                 default:
                     cr.Rectangle(4, 4, 40, 40);
                     cr.Fill();

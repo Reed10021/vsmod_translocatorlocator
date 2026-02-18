@@ -9,6 +9,14 @@ namespace TranslocatorLocatorRedux.ModSystem.Item
 
     public class ItemTranslocatorLocator : ItemBaseLocator
     {
+        protected override int GetSmallConeRange(ModConfig modConfig)
+        {
+            return modConfig.TranslocatorLocatorSmallConeRange;
+        }
+        protected override int GetSmallConeCost(ModConfig modConfig)
+        {
+            return modConfig.TranslocatorLocatorSmallConeCost;
+        }
         protected override int GetConeRange(ModConfig modConfig)
         {
             return modConfig.TranslocatorLocatorConeRange;
@@ -16,6 +24,14 @@ namespace TranslocatorLocatorRedux.ModSystem.Item
         protected override int GetConeCost(ModConfig modConfig)
         {
             return modConfig.TranslocatorLocatorConeCost;
+        }
+        protected override int GetExtraSmallCubeRange(ModConfig modConfig)
+        {
+            return modConfig.TranslocatorLocatorCubeExtraSmallRange;
+        }
+        protected override int GetExtraSmallCubeCost(ModConfig modConfig)
+        {
+            return modConfig.TranslocatorLocatorCubeExtraSmallCost;
         }
         protected override int GetSmallCubeRange(ModConfig modConfig)
         {

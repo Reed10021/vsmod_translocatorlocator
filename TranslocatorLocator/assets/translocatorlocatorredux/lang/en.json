@@ -1,5 +1,7 @@
 {
+  "translocatorlocatorredux:smalldirectionalmode": "Small Directional Mode",
   "translocatorlocatorredux:directionalmode": "Directional Mode",
+  "translocatorlocatorredux:extrasmallcubemode": "Extra Small Radial Mode",
   "translocatorlocatorredux:smallcubemode": "Small Radial Mode",
   "translocatorlocatorredux:mediumcubemode": "Medium Radial Mode",
   "translocatorlocatorredux:largecubemode": "Large Radial Mode",

@@ -12,13 +12,23 @@ namespace TranslocatorLocatorRedux.ModConfig
         public static ModConfig Current { get; set; }
 
         // translocators
-        public string TranslocatorLocatorConeRangeDesc = "The range of the directional mode in blocks.";
+        public string TranslocatorLocatorSmallConeRangeDesc = "The range of the short directional mode in blocks.";
+        public int TranslocatorLocatorSmallConeRange = 10;
+        public string TranslocatorLocatorSmallConeCostDesc = "The durability cost of the short directional mode.";
+        public int TranslocatorLocatorSmallConeCost = 1;
+
+        public string TranslocatorLocatorConeRangeDesc = "The range of the normal directional mode in blocks.";
         public int TranslocatorLocatorConeRange = 50;
-        public string TranslocatorLocatorConeCostDesc = "The durability cost of the directional mode.";
+        public string TranslocatorLocatorConeCostDesc = "The durability cost of the normal directional mode.";
         public int TranslocatorLocatorConeCost = 4;
 
+        public string TranslocatorLocatorCubeExtraSmallRangeDesc = "The radius of the extra short range mode in blocks.";
+        public int TranslocatorLocatorCubeExtraSmallRange = 10;
+        public string TranslocatorLocatorCubeExtraSmallCostDesc = "The durability cost of the extra short range mode.";
+        public int TranslocatorLocatorCubeExtraSmallCost = 1;
+
         public string TranslocatorLocatorCubeSmallRangeDesc = "The radius of the short range mode in blocks.";
-        public int TranslocatorLocatorCubeSmallRange = 30;
+        public int TranslocatorLocatorCubeSmallRange = 25;
         public string TranslocatorLocatorCubeSmallCostDesc = "The durability cost of the short range mode.";
         public int TranslocatorLocatorCubeSmallCost = 2;
 
@@ -33,13 +43,23 @@ namespace TranslocatorLocatorRedux.ModConfig
         public int TranslocatorLocatorCubeLargeCost = 25;
 
         // aged wood items
-        public string AgedWoodLocatorConeRangeDesc = "The range of the directional mode in blocks.";
+        public string AgedWoodLocatorSmallConeRangeDesc = "The range of the short directional mode in blocks.";
+        public int AgedWoodLocatorSmallConeRange = 10;
+        public string AgedWoodLocatorSmallConeCostDesc = "The durability cost of the short directional mode.";
+        public int AgedWoodLocatorSmallConeCost = 1;
+
+        public string AgedWoodLocatorConeRangeDesc = "The range of the normal directional mode in blocks.";
         public int AgedWoodLocatorConeRange = 50;
-        public string AgedWoodLocatorConeCostDesc = "The durability cost of the directional mode.";
+        public string AgedWoodLocatorConeCostDesc = "The durability cost of the normal directional mode.";
         public int AgedWoodLocatorConeCost = 4;
 
+        public string AgedWoodLocatorCubeExtraSmallRangeDesc = "The radius of the extra short range mode in blocks.";
+        public int AgedWoodLocatorCubeExtraSmallRange = 10;
+        public string AgedWoodLocatorCubeExtraSmallCostDesc = "The durability cost of the extra short range mode.";
+        public int AgedWoodLocatorCubeExtraSmallCost = 1;
+
         public string AgedWoodLocatorCubeSmallRangeDesc = "The radius of the short range mode in blocks.";
-        public int AgedWoodLocatorCubeSmallRange = 30;
+        public int AgedWoodLocatorCubeSmallRange = 25;
         public string AgedWoodLocatorCubeSmallCostDesc = "The durability cost of the short range mode.";
         public int AgedWoodLocatorCubeSmallCost = 2;
 

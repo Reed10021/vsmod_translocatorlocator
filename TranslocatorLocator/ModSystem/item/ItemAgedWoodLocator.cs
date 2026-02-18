@@ -8,6 +8,14 @@ namespace TranslocatorLocatorRedux.ModSystem.Item
 
     public class ItemAgedWoodLocator : ItemBaseLocator
     {
+        protected override int GetSmallConeRange(ModConfig modConfig)
+        {
+            return modConfig.AgedWoodLocatorSmallConeRange;
+        }
+        protected override int GetSmallConeCost(ModConfig modConfig)
+        {
+            return modConfig.AgedWoodLocatorSmallConeCost;
+        }
         protected override int GetConeRange(ModConfig modConfig)
         {
             return modConfig.AgedWoodLocatorConeRange;
@@ -15,6 +23,14 @@ namespace TranslocatorLocatorRedux.ModSystem.Item
         protected override int GetConeCost(ModConfig modConfig)
         {
             return modConfig.AgedWoodLocatorConeCost;
+        }
+        protected override int GetExtraSmallCubeRange(ModConfig modConfig)
+        {
+            return modConfig.AgedWoodLocatorCubeExtraSmallRange;
+        }
+        protected override int GetExtraSmallCubeCost(ModConfig modConfig)
+        {
+            return modConfig.AgedWoodLocatorCubeExtraSmallCost;
         }
         protected override int GetSmallCubeRange(ModConfig modConfig)
         {

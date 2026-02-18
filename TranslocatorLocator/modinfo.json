@@ -5,7 +5,7 @@
   "authors": [ "Asraiel", "Reed10021" ],
   "description": "Adds craftable locators to locate translocators. And ruins.",
   "website": "https://github.com/Reed10021/vsmod_translocatorlocator/",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "dependencies": {
     "game": "1.21.0"
   },
