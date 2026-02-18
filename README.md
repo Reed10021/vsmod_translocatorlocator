@@ -1,3 +1,3 @@
-# vsmod_translocatorlocator
+# vsmod_translocatorlocatorredux
 
-A Mod for Vintage Story which adds craftable locator devices.
+A mod for Vintage Story which adds craftable locator devices. Forked and update to Vintage Story 1.21

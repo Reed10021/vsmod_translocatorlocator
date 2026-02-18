@@ -1,11 +1,13 @@
 {
   "type": "code",
-  "modid": "translocatorlocator",
-  "name": "TranslocatorLocator",
-  "author": "Asraiel",
-  "description": "Adds a craftable locators.",
-  "version": "1.0.1",
+  "modid": "translocatorlocatorredux",
+  "name": "Translocator Locator Redux",
+  "authors": [ "Asraiel", "Reed10021" ],
+  "description": "Adds craftable locators to locate translocators. And ruins.",
+  "website": "https://github.com/Reed10021/vsmod_translocatorlocator/",
+  "version": "1.0.0",
   "dependencies": {
-    "game": ""
-  }
+    "game": "1.21.0"
+  },
+  "side": "universal"
 }

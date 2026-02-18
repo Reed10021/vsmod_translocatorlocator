@@ -1,0 +1,53 @@
+[
+  {
+    "ingredientPattern": "TPP,TMM,TPP",
+    "width": 3,
+    "height": 3,
+    "ingredients": {
+      "P": {
+        "type": "item",
+        "code": "game:metalplate-iron",
+        "quantity": 1
+      },
+      "M": {
+        "type": "block",
+        "code": "game:metal-parts",
+        "quantity": 1
+      },
+      "T": {
+        "type": "item",
+        "code": "game:gear-temporal",
+        "quantity": 1
+      }
+    },
+    "name": "Translocator Locator",
+    "output": {
+      "type": "item",
+      "code": "translocatorlocatorredux:translocatorlocator"
+    }
+  },
+  {
+    "ingredientPattern": "AT",
+    "width": 2,
+    "height": 1,
+    "recipeGroup": 1,
+    "ingredients": {
+      "A": {
+        "type": "item",
+        "code": "translocatorlocatorredux:translocatorlocator",
+        "quantity": 1
+      },
+      "T": {
+        "type": "item",
+        "code": "game:gear-temporal",
+        "quantity": 1
+      }
+    },
+    "shapeless": true,
+    "name": "Translocator Locator",
+    "output": {
+      "code": "translocatorlocatorredux:translocatorlocator",
+      "type": "item"
+    }
+  }
+]

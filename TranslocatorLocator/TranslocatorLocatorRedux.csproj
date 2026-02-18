@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup Label="VSModTemplate Properties">
-    <TargetFramework>net462</TargetFramework>
+    <TargetFramework>net8</TargetFramework>
     <!-- These are necessary because we're kind of jury rigging everything together between .NET Standard 2.0 and .NET 4.5.2. -->
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
@@ -42,10 +42,6 @@
     </Reference>
     <Reference Include="VSCreativeMod">
       <HintPath>$(VINTAGE_STORY)/Mods/VSCreativeMod.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>$(VINTAGE_STORY)/Lib/Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Harmony">
@@ -99,16 +95,20 @@
     <Content Include="assets/**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Remove="assets\translocatorlocator\itemtypes\agedwoodlocator.json" />
-    <None Remove="assets\translocatorlocator\itemtypes\translocatorlocator.json" />
-    <None Remove="assets\translocatorlocator\lang\De.json" />
-    <None Remove="assets\translocatorlocator\lang\en.json" />
-    <None Remove="assets\translocatorlocator\recipes\grid\agedwoodlocator.json" />
-    <None Remove="assets\translocatorlocator\recipes\grid\translocatorlocator.json" />
-    <None Remove="assets\translocatorlocator\shapes\item\agedwoodlocator.json" />
-    <None Remove="assets\translocatorlocator\shapes\item\translocatorlocator.json" />
+    <None Remove="assets\translocatorlocatorredux\itemtypes\agedwoodlocator.json" />
+    <None Remove="assets\translocatorlocatorredux\itemtypes\translocatorlocator.json" />
+    <None Remove="assets\translocatorlocatorredux\lang\De.json" />
+    <None Remove="assets\translocatorlocatorredux\lang\en.json" />
+    <None Remove="assets\translocatorlocatorredux\lang\fr.json" />
+    <None Remove="assets\translocatorlocatorredux\recipes\grid\agedwoodlocator.json" />
+    <None Remove="assets\translocatorlocatorredux\recipes\grid\translocatorlocator.json" />
+    <None Remove="assets\translocatorlocatorredux\shapes\item\agedwoodlocator.json" />
+    <None Remove="assets\translocatorlocatorredux\shapes\item\translocatorlocator.json" />
     <None Update="modinfo.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 </Project>

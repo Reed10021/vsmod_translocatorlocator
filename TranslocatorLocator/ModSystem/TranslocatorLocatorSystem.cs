@@ -1,8 +1,9 @@
 namespace TranslocatorLocator.ModSystem
 {
+    using ModConfig;
+    using TranslocatorLocator.ModSystem.Item;
     using Vintagestory.API.Common;
     using Vintagestory.API.Server;
-    using ModConfig;
 
     public class TranslocatorLocatorSystem : ModSystem
     {
@@ -14,7 +15,7 @@ namespace TranslocatorLocator.ModSystem
 
         public override void StartServerSide(ICoreServerAPI api)
         {
-            api.Logger.Debug("[TranslocatorLocator] StartServer");
+            //api.Logger.Debug("[TranslocatorLocator] StartServer");
             base.Start(api);
 
             ModConfig.Load(api);
@@ -22,7 +23,7 @@ namespace TranslocatorLocator.ModSystem
 
         public override void Start(ICoreAPI api)
         {
-            api.Logger.Debug("[TranslocatorLocator] Start");
+            //api.Logger.Debug("[TranslocatorLocator] Start");
             base.Start(api);
 
             api.RegisterItemClass("ItemTranslocatorLocator", typeof(ItemTranslocatorLocator));

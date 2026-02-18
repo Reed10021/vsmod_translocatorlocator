@@ -1,30 +1,31 @@
-namespace Locator
+namespace TranslocatorLocator.ModSystem.Item
 {
     using System;
+    using System.Text;
+    using Cairo;
     using Vintagestory.API.Client;
     using Vintagestory.API.Common;
     using Vintagestory.API.Config;
+    using Vintagestory.API.MathTools;
     using Vintagestory.API.Server;
     using Vintagestory.API.Util;
-    using System.Text;
-    using Vintagestory.API.MathTools;
-    using Cairo;
 #pragma warning disable IDE0005
     using System.Linq;
+    using TranslocatorLocator.ModConfig;
 #pragma warning restore IDE0005
 
     public abstract class ItemBaseLocator : Item
     {
         private SkillItem[] toolModes;
 
-        protected abstract int GetConeRange(ModConfig.ModConfig modConfig);
-        protected abstract int GetConeCost(ModConfig.ModConfig modConfig);
-        protected abstract int GetSmallCubeRange(ModConfig.ModConfig modConfig);
-        protected abstract int GetSmallCubeCost(ModConfig.ModConfig modConfig);
-        protected abstract int GetMediumCubeRange(ModConfig.ModConfig modConfig);
-        protected abstract int GetMediumCubeCost(ModConfig.ModConfig modConfig);
-        protected abstract int GetLargeCubeRange(ModConfig.ModConfig modConfig);
-        protected abstract int GetLargeCubeCost(ModConfig.ModConfig modConfig);
+        protected abstract int GetConeRange(ModConfig modConfig);
+        protected abstract int GetConeCost(ModConfig modConfig);
+        protected abstract int GetSmallCubeRange(ModConfig modConfig);
+        protected abstract int GetSmallCubeCost(ModConfig modConfig);
+        protected abstract int GetMediumCubeRange(ModConfig modConfig);
+        protected abstract int GetMediumCubeCost(ModConfig modConfig);
+        protected abstract int GetLargeCubeRange(ModConfig modConfig);
+        protected abstract int GetLargeCubeCost(ModConfig modConfig);
         protected abstract bool IsSearchedBlock(Block block);
         protected abstract void PrintCubeSearchResults(int count, int range, ICoreClientAPI capi);
         protected abstract void PrintConeSearchResults(int count, int range, int direction, ICoreClientAPI capi);
@@ -43,7 +44,7 @@ namespace Locator
                     var cost = 0;
                     var player = byEntity.World.PlayerByUid((byEntity as EntityPlayer).PlayerUID);
                     var toolMode = this.GetToolMode(slot, player, blockSel);
-                    var modConfig = ModConfig.ModConfig.Current;
+                    var modConfig = ModConfig.Current;
 
                     switch (toolMode)
                     {
@@ -69,7 +70,7 @@ namespace Locator
 
                     if (byEntity.Api.Side == EnumAppSide.Server)
                     {
-                        this.ApplyDurabilityDamageServer(cost, slot, byEntity);
+                        ApplyDurabilityDamageServer(cost, slot, byEntity);
                     }
                     else
                     {
@@ -88,7 +89,7 @@ namespace Locator
                                 capi.ShowChatMessage("Unsupported tool mode!");
                                 break;
                         }
-                        this.SpawnParticles(blockSel, byEntity);
+                        SpawnParticles(blockSel, byEntity);
                     }
                 }
                 handling = EnumHandHandling.PreventDefaultAction;
@@ -102,10 +103,10 @@ namespace Locator
                 SkillItem[] modes;
 
                 modes = new SkillItem[4];
-                modes[0] = new SkillItem() { Code = new AssetLocation("cone"), Name = Lang.Get("translocatorlocator:directionalmode") };
-                modes[1] = new SkillItem() { Code = new AssetLocation("smallcube"), Name = Lang.Get("translocatorlocator:smallcubemode") };
-                modes[2] = new SkillItem() { Code = new AssetLocation("mediumcube"), Name = Lang.Get("translocatorlocator:mediumcubemode") };
-                modes[3] = new SkillItem() { Code = new AssetLocation("largecube"), Name = Lang.Get("translocatorlocator:largecubemode") };
+                modes[0] = new SkillItem() { Code = new AssetLocation("cone"), Name = Lang.Get("translocatorlocatorredux:directionalmode") };
+                modes[1] = new SkillItem() { Code = new AssetLocation("smallcube"), Name = Lang.Get("translocatorlocatorredux:smallcubemode") };
+                modes[2] = new SkillItem() { Code = new AssetLocation("mediumcube"), Name = Lang.Get("translocatorlocatorredux:mediumcubemode") };
+                modes[3] = new SkillItem() { Code = new AssetLocation("largecube"), Name = Lang.Get("translocatorlocatorredux:largecubemode") };
 
                 if (api is ICoreClientAPI capi)
                 {
@@ -124,12 +125,12 @@ namespace Locator
             return this.toolModes;
         }
 
-        public override int GetToolMode(ItemSlot slot, IPlayer byPlayer, BlockSelection blockSel)
+        public override int GetToolMode(ItemSlot slot, IPlayer byPlayer, BlockSelection blockSelection)
         {
             return Math.Min(this.toolModes.Length - 1, slot.Itemstack.Attributes.GetInt("toolMode"));
         }
 
-        public override void SetToolMode(ItemSlot slot, IPlayer byPlayer, BlockSelection blockSel, int toolMode)
+        public override void SetToolMode(ItemSlot slot, IPlayer byPlayer, BlockSelection blockSelection, int toolMode)
         {
             slot.Itemstack.Attributes.SetInt("toolMode", toolMode);
         }
@@ -222,9 +223,9 @@ namespace Locator
 
             var capi = byEntity.Api as ICoreClientAPI;
             this.PrintConeSearchResults(count, range, blockSel.Face.Index, capi);
-            this.PlaySound(count > 0, byEntity);
+            PlaySound(count > 0, byEntity);
 
-            this.ApplyDurabilityDamageClient(durabilityDamage, slot, byEntity);
+            ApplyDurabilityDamageClient(durabilityDamage, slot, byEntity);
         }
 
         private int SearchCubeArea(IWorldAccessor world, BlockSelection blockSel, int range)
@@ -258,12 +259,12 @@ namespace Locator
             var count = this.SearchCubeArea(byEntity.World, blockSel, range);
 
             this.PrintCubeSearchResults(count, range, capi);
-            this.PlaySound(count > 0, byEntity);
+            PlaySound(count > 0, byEntity);
 
-            this.ApplyDurabilityDamageClient(durabilityDamage, slot, byEntity);
+            ApplyDurabilityDamageClient(durabilityDamage, slot, byEntity);
         }
 
-        private void ApplyDurabilityDamageServer(int durabilityDamage, ItemSlot slot, EntityAgent byEntity)
+        private static void ApplyDurabilityDamageServer(int durabilityDamage, ItemSlot slot, EntityAgent byEntity)
         {
             if (slot != null && slot.Itemstack != null)
             {
@@ -276,7 +277,7 @@ namespace Locator
             }
         }
 
-        private void ApplyDurabilityDamageClient(int durabilityDamage, ItemSlot slot, EntityAgent byEntity)
+        private static void ApplyDurabilityDamageClient(int durabilityDamage, ItemSlot slot, EntityAgent byEntity)
         {
             if (slot != null && slot.Itemstack != null)
             {
@@ -289,32 +290,32 @@ namespace Locator
             }
         }
 
-        private void SpawnParticles(BlockSelection blockSel, EntityAgent byEntity)
+        private static void SpawnParticles(BlockSelection blockSel, EntityAgent byEntity)
         {
             var byPlayer = (byEntity as EntityPlayer).Player;
             var pos = blockSel.Position.ToVec3d().Add(blockSel.HitPosition.ToVec3f().ToVec3d());
             byEntity.World.SpawnCubeParticles(blockSel.Position, pos, 0.5f, 8, 0.7f, byPlayer);
         }
 
-        private void PlaySound(bool found, EntityAgent byEntity)
+        private static void PlaySound(bool found, EntityAgent byEntity)
         {
             if (found)
             {
-                this.PlaySoundFound(byEntity);
+                PlaySoundFound(byEntity);
             }
             else
             {
-                this.PlaySoundNotFound(byEntity);
+                PlaySoundNotFound(byEntity);
             }
         }
 
-        private void PlaySoundNotFound(EntityAgent byEntity)
+        private static void PlaySoundNotFound(EntityAgent byEntity)
         {
             var pos = byEntity.Pos;
             byEntity.World.PlaySoundAt(new AssetLocation("sounds/tool/padlock"), pos.X, pos.Y, pos.Z, null);
         }
 
-        private void PlaySoundFound(EntityAgent byEntity)
+        private static void PlaySoundFound(EntityAgent byEntity)
         {
             var pos = byEntity.Pos;
             byEntity.World.PlaySoundAt(new AssetLocation("sounds/tool/reinforce"), pos.X, pos.Y, pos.Z, null);
