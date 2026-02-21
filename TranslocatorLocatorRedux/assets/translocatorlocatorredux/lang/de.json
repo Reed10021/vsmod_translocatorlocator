@@ -1,0 +1,104 @@
+{
+  "translocatorlocatorredux:smalldirectionalmode": "Kleiner Direktionaler Modus",
+  "translocatorlocatorredux:directionalmode": "Direktionaler Modus",
+  "translocatorlocatorredux:extrasmallcubemode": "Sehr Kleiner Radialmodus",
+  "translocatorlocatorredux:smallcubemode": "Kleiner Radialmodus",
+  "translocatorlocatorredux:mediumcubemode": "Mittlerer Radialmodus",
+  "translocatorlocatorredux:largecubemode": "Großer Radialmodus",
+
+  "translocatorlocatorredux:item-translocatorlocator": "Translokatorlokator",
+  "translocatorlocatorredux:translocator_flavortext": "Ein nützliches kleines Gerät. Es erleichtert die Suche nach Translokatoren enorm.",
+  "translocatorlocatorredux:translocator_cubenofound": "Es gibt keine defekten Translokatoren innerhalb von #range Blöcken um diesen Block.",
+  "translocatorlocatorredux:translocator_cubefoundlessthantwo": "Es gibt #no defekten Translokator innerhalb von #range Blöcken um diesen Block.",
+  "translocatorlocatorredux:translocator_cubefoundmorethanone": "Es gibt #no defekte Translokatoren innerhalb von #range Blöcken um diesen Block!",
+  "translocatorlocatorredux:translocator_conenofound": "Es gibt keinen defekten Translokator innerhalb von #range Blöcken #direction.",
+  "translocatorlocatorredux:translocator_conefoundlessthantwo": "Es gibt #no defekten Translokator innerhalb von #range Blöcken #direction.",
+  "translocatorlocatorredux:translocator_conefoundmorethanone": "Es gibt #no defekte Translokatoren innerhalb von #range Blöcken #direction!",
+
+  "translocatorlocatorredux:item-agedwoodlocator": "Ruinenlokator",
+  "translocatorlocatorredux:agedwood_flavortext": "Ein nützliches kleines Gerät. Es erleichtert die Suche nach antiken Ruinen enorm.",
+  "translocatorlocatorredux:agedwood_cubefoundnothing": "Es gibt keine antiken Ruinen innerhalb von #range Blöcken um diesen Block.",
+  "translocatorlocatorredux:agedwood_cubefoundsomething": "Das Gerät hat Spuren antiker Ruinen innerhalb von #range Blöcken um diesen Block gefunden!",
+  "translocatorlocatorredux:agedwood_conefoundnothing": "Es gibt keine antiken Ruinen innerhalb von #range Blöcken #direction.",
+  "translocatorlocatorredux:agedwood_conefoundsomething": "Das Gerät hat Spuren antiker Ruinen innerhalb von #range Blöcken #direction gefunden!",
+
+  "translocatorlocatorredux:locator_southofthatblock": "südlich dieses Blocks",
+  "translocatorlocatorredux:locator_westofthatblock": "westlich dieses Blocks",
+  "translocatorlocatorredux:locator_northofthatblock": "nördlich dieses Blocks",
+  "translocatorlocatorredux:locator_eastofthatblock": "östlich dieses Blocks",
+  "translocatorlocatorredux:locator_belowthatblock": "unter diesem Block",
+  "translocatorlocatorredux:locator_abovethatblock": "über diesem Block",
+  "translocatorlocatorredux:locator_somewherearoundthatblock": "irgendwo um diesen Block",
+
+  "translocatorlocatorredux:config-aw-use-cupronickel-plates": "Kupfernickelplatten verwenden",
+  "translocatorlocatorredux:config-aw-use-cupronickel-platesComment": "Wenn aktiviert, verwendet das Herstellungsrezept Kupfernickelplatten statt Eisenplatten. Erfordert einen Welt-/Serverneustart.",
+
+  "translocatorlocatorredux:config-aw-cone-cost": "Haltbarkeitskosten (Direktionaler Modus)",
+  "translocatorlocatorredux:config-aw-cone-costComment": "Haltbarkeitskosten pro Nutzung für diesen Scanmodus.",
+  "translocatorlocatorredux:config-aw-cone-range": "Reichweite (Direktionaler Modus)",
+  "translocatorlocatorredux:config-aw-cone-rangeComment": "Maximale Reichweite (in Blöcken) für den direktionalen Scan.",
+
+  "translocatorlocatorredux:config-aw-smallcone-cost": "Haltbarkeitskosten (Kleiner Direktionaler Modus)",
+  "translocatorlocatorredux:config-aw-smallcone-costComment": "Haltbarkeitskosten pro Nutzung für diesen Scanmodus.",
+  "translocatorlocatorredux:config-aw-smallcone-range": "Reichweite (Kleiner Direktionaler Modus)",
+  "translocatorlocatorredux:config-aw-smallcone-rangeComment": "Maximale Reichweite (in Blöcken) für den kurzen direktionalen Scan.",
+
+  "translocatorlocatorredux:config-aw-cubexs-cost": "Haltbarkeitskosten (Sehr kleiner Radialmodus)",
+  "translocatorlocatorredux:config-aw-cubexs-costComment": "Haltbarkeitskosten pro Nutzung für diesen Scanmodus.",
+  "translocatorlocatorredux:config-aw-cubexs-range": "Radius (Sehr kleiner Radialmodus)",
+  "translocatorlocatorredux:config-aw-cubexs-rangeComment": "Radius (in Blöcken) des sehr kleinen Radialscans.",
+
+  "translocatorlocatorredux:config-aw-cubes-cost": "Haltbarkeitskosten (Kleiner Radialmodus)",
+  "translocatorlocatorredux:config-aw-cubes-costComment": "Haltbarkeitskosten pro Nutzung für diesen Scanmodus.",
+  "translocatorlocatorredux:config-aw-cubes-range": "Radius (Kleiner Radialmodus)",
+  "translocatorlocatorredux:config-aw-cubes-rangeComment": "Radius (in Blöcken) des kleinen Radialscans.",
+
+  "translocatorlocatorredux:config-aw-cubem-cost": "Haltbarkeitskosten (Mittlerer Radialmodus)",
+  "translocatorlocatorredux:config-aw-cubem-costComment": "Haltbarkeitskosten pro Nutzung für diesen Scanmodus.",
+  "translocatorlocatorredux:config-aw-cubem-range": "Radius (Mittlerer Radialmodus)",
+  "translocatorlocatorredux:config-aw-cubem-rangeComment": "Radius (in Blöcken) des mittleren Radialscans.",
+
+  "translocatorlocatorredux:config-aw-cubel-cost": "Haltbarkeitskosten (Großer Radialmodus)",
+  "translocatorlocatorredux:config-aw-cubel-costComment": "Haltbarkeitskosten pro Nutzung für diesen Scanmodus.",
+  "translocatorlocatorredux:config-aw-cubel-range": "Radius (Großer Radialmodus)",
+  "translocatorlocatorredux:config-aw-cubel-rangeComment": "Radius (in Blöcken) des großen Radialscans.",
+
+  "translocatorlocatorredux:config-tl-use-cupronickel-plates": "Kupfernickelplatten verwenden",
+  "translocatorlocatorredux:config-tl-use-cupronickel-platesComment": "Wenn aktiviert, verwendet das Herstellungsrezept Kupfernickelplatten statt Eisenplatten. Erfordert einen Welt-/Serverneustart.",
+
+  "translocatorlocatorredux:config-tl-cone-cost": "Haltbarkeitskosten (Direktionaler Modus)",
+  "translocatorlocatorredux:config-tl-cone-costComment": "Haltbarkeitskosten pro Nutzung für diesen Scanmodus.",
+  "translocatorlocatorredux:config-tl-cone-range": "Reichweite (Direktionaler Modus)",
+  "translocatorlocatorredux:config-tl-cone-rangeComment": "Maximale Reichweite (in Blöcken) für den direktionalen Scan.",
+
+  "translocatorlocatorredux:config-tl-smallcone-cost": "Haltbarkeitskosten (Kleiner Direktionaler Modus)",
+  "translocatorlocatorredux:config-tl-smallcone-costComment": "Haltbarkeitskosten pro Nutzung für diesen Scanmodus.",
+  "translocatorlocatorredux:config-tl-smallcone-range": "Reichweite (Kleiner Direktionaler Modus)",
+  "translocatorlocatorredux:config-tl-smallcone-rangeComment": "Maximale Reichweite (in Blöcken) für den kurzen direktionalen Scan.",
+
+  "translocatorlocatorredux:config-tl-cubexs-cost": "Haltbarkeitskosten (Sehr kleiner Radialmodus)",
+  "translocatorlocatorredux:config-tl-cubexs-costComment": "Haltbarkeitskosten pro Nutzung für diesen Scanmodus.",
+  "translocatorlocatorredux:config-tl-cubexs-range": "Radius (Sehr kleiner Radialmodus)",
+  "translocatorlocatorredux:config-tl-cubexs-rangeComment": "Radius (in Blöcken) des sehr kleinen Radialscans.",
+
+  "translocatorlocatorredux:config-tl-cubes-cost": "Haltbarkeitskosten (Kleiner Radialmodus)",
+  "translocatorlocatorredux:config-tl-cubes-costComment": "Haltbarkeitskosten pro Nutzung für diesen Scanmodus.",
+  "translocatorlocatorredux:config-tl-cubes-range": "Radius (Kleiner Radialmodus)",
+  "translocatorlocatorredux:config-tl-cubes-rangeComment": "Radius (in Blöcken) des kleinen Radialscans.",
+
+  "translocatorlocatorredux:config-tl-cubem-cost": "Haltbarkeitskosten (Mittlerer Radialmodus)",
+  "translocatorlocatorredux:config-tl-cubem-costComment": "Haltbarkeitskosten pro Nutzung für diesen Scanmodus.",
+  "translocatorlocatorredux:config-tl-cubem-range": "Radius (Mittlerer Radialmodus)",
+  "translocatorlocatorredux:config-tl-cubem-rangeComment": "Radius (in Blöcken) des mittleren Radialscans.",
+
+  "translocatorlocatorredux:config-tl-cubel-cost": "Haltbarkeitskosten (Großer Radialmodus)",
+  "translocatorlocatorredux:config-tl-cubel-costComment": "Haltbarkeitskosten pro Nutzung für diesen Scanmodus.",
+  "translocatorlocatorredux:config-tl-cubel-range": "Radius (Großer Radialmodus)",
+  "translocatorlocatorredux:config-tl-cubel-rangeComment": "Radius (in Blöcken) des großen Radialscans.",
+
+  "translocatorlocatorredux:config-durability": "Maximale Haltbarkeit",
+  "translocatorlocatorredux:config-durabilityComment": "Maximale Haltbarkeit des Gegenstands. Auf 0 setzen, um Haltbarkeit zu deaktivieren (unzerstörbar).",
+
+  "translocatorlocatorredux:config-section-translocator-locator": "Translokatorlokator",
+  "translocatorlocatorredux:config-section-ancient-ruin-locator": "Ruinenlokator"
+}

@@ -1,0 +1,104 @@
+{
+  "translocatorlocatorredux:smalldirectionalmode": "Mode directionnel court",
+  "translocatorlocatorredux:directionalmode": "Mode directionnel",
+  "translocatorlocatorredux:extrasmallcubemode": "Mode radial très petit",
+  "translocatorlocatorredux:smallcubemode": "Mode radial petit",
+  "translocatorlocatorredux:mediumcubemode": "Mode radial moyen",
+  "translocatorlocatorredux:largecubemode": "Mode radial large",
+
+  "translocatorlocatorredux:item-translocatorlocator": "Localisateur de translocateurs",
+  "translocatorlocatorredux:translocator_flavortext": "Un petit appareil d’une utilité suspecte. Il facilite la recherche des translocateurs.",
+  "translocatorlocatorredux:translocator_cubenofound": "Il n’y a pas de translocateurs cassés dans un rayon de #range blocs autour de ce bloc.",
+  "translocatorlocatorredux:translocator_cubefoundlessthantwo": "Il y a #no translocateur cassé dans un rayon de #range blocs autour de ce bloc.",
+  "translocatorlocatorredux:translocator_cubefoundmorethanone": "Il y a #no translocateurs cassés dans un rayon de #range blocs autour de ce bloc !",
+  "translocatorlocatorredux:translocator_conenofound": "Il n’y a pas de translocateur cassé dans un rayon de #range blocs #direction.",
+  "translocatorlocatorredux:translocator_conefoundlessthantwo": "Il y a #no translocateur cassé dans un rayon de #range blocs #direction.",
+  "translocatorlocatorredux:translocator_conefoundmorethanone": "Il y a #no translocateurs cassés dans un rayon de #range blocs #direction !",
+
+  "translocatorlocatorredux:item-agedwoodlocator": "Localisateur de ruines anciennes",
+  "translocatorlocatorredux:agedwood_flavortext": "Un petit appareil d’une utilité suspecte. Il facilite la recherche de ruines anciennes.",
+  "translocatorlocatorredux:agedwood_cubefoundnothing": "Il n’y a pas de ruines anciennes dans un rayon de #range blocs autour de ce bloc.",
+  "translocatorlocatorredux:agedwood_cubefoundsomething": "L’appareil a trouvé des traces de ruines anciennes dans un rayon de #range blocs autour de ce bloc !",
+  "translocatorlocatorredux:agedwood_conefoundnothing": "Il n’y a pas de ruines anciennes dans un rayon de #range blocs #direction.",
+  "translocatorlocatorredux:agedwood_conefoundsomething": "L’appareil a trouvé des traces de ruines anciennes dans un rayon de #range blocs #direction !",
+
+  "translocatorlocatorredux:locator_southofthatblock": "au sud de ce bloc",
+  "translocatorlocatorredux:locator_westofthatblock": "à l’ouest de ce bloc",
+  "translocatorlocatorredux:locator_northofthatblock": "au nord de ce bloc",
+  "translocatorlocatorredux:locator_eastofthatblock": "à l’est de ce bloc",
+  "translocatorlocatorredux:locator_belowthatblock": "sous ce bloc",
+  "translocatorlocatorredux:locator_abovethatblock": "au-dessus de ce bloc",
+  "translocatorlocatorredux:locator_somewherearoundthatblock": "quelque part autour de ce bloc",
+
+  "translocatorlocatorredux:config-aw-use-cupronickel-plates": "Utiliser des plaques en cupro-nickel",
+  "translocatorlocatorredux:config-aw-use-cupronickel-platesComment": "Si activé, la recette d'artisanat utilise des plaques en cupro-nickel au lieu de plaques en fer. Nécessite un redémarrage du monde/serveur.",
+
+  "translocatorlocatorredux:config-aw-cone-cost": "Coût en durabilité (Mode directionnel)",
+  "translocatorlocatorredux:config-aw-cone-costComment": "Coût en durabilité par utilisation pour ce mode de scan.",
+  "translocatorlocatorredux:config-aw-cone-range": "Portée (Mode directionnel)",
+  "translocatorlocatorredux:config-aw-cone-rangeComment": "Portée maximale (en blocs) pour le scan directionnel.",
+
+  "translocatorlocatorredux:config-aw-smallcone-cost": "Coût en durabilité (Mode directionnel court)",
+  "translocatorlocatorredux:config-aw-smallcone-costComment": "Coût en durabilité par utilisation pour ce mode de scan.",
+  "translocatorlocatorredux:config-aw-smallcone-range": "Portée (Mode directionnel court)",
+  "translocatorlocatorredux:config-aw-smallcone-rangeComment": "Portée maximale (en blocs) pour le scan directionnel court.",
+
+  "translocatorlocatorredux:config-aw-cubexs-cost": "Coût en durabilité (Mode radial très petit)",
+  "translocatorlocatorredux:config-aw-cubexs-costComment": "Coût en durabilité par utilisation pour ce mode de scan.",
+  "translocatorlocatorredux:config-aw-cubexs-range": "Rayon (Mode radial très petit)",
+  "translocatorlocatorredux:config-aw-cubexs-rangeComment": "Rayon (en blocs) du scan radial très petit.",
+
+  "translocatorlocatorredux:config-aw-cubes-cost": "Coût en durabilité (Mode radial petit)",
+  "translocatorlocatorredux:config-aw-cubes-costComment": "Coût en durabilité par utilisation pour ce mode de scan.",
+  "translocatorlocatorredux:config-aw-cubes-range": "Rayon (Mode radial petit)",
+  "translocatorlocatorredux:config-aw-cubes-rangeComment": "Rayon (en blocs) du scan radial petit.",
+
+  "translocatorlocatorredux:config-aw-cubem-cost": "Coût en durabilité (Mode radial moyen)",
+  "translocatorlocatorredux:config-aw-cubem-costComment": "Coût en durabilité par utilisation pour ce mode de scan.",
+  "translocatorlocatorredux:config-aw-cubem-range": "Rayon (Mode radial moyen)",
+  "translocatorlocatorredux:config-aw-cubem-rangeComment": "Rayon (en blocs) du scan radial moyen.",
+
+  "translocatorlocatorredux:config-aw-cubel-cost": "Coût en durabilité (Mode radial large)",
+  "translocatorlocatorredux:config-aw-cubel-costComment": "Coût en durabilité par utilisation pour ce mode de scan.",
+  "translocatorlocatorredux:config-aw-cubel-range": "Rayon (Mode radial large)",
+  "translocatorlocatorredux:config-aw-cubel-rangeComment": "Rayon (en blocs) du scan radial large.",
+
+  "translocatorlocatorredux:config-tl-use-cupronickel-plates": "Utiliser des plaques en cupro-nickel",
+  "translocatorlocatorredux:config-tl-use-cupronickel-platesComment": "Si activé, la recette d'artisanat utilise des plaques en cupro-nickel au lieu de plaques en fer. Nécessite un redémarrage du monde/serveur.",
+
+  "translocatorlocatorredux:config-tl-cone-cost": "Coût en durabilité (Mode directionnel)",
+  "translocatorlocatorredux:config-tl-cone-costComment": "Coût en durabilité par utilisation pour ce mode de scan.",
+  "translocatorlocatorredux:config-tl-cone-range": "Portée (Mode directionnel)",
+  "translocatorlocatorredux:config-tl-cone-rangeComment": "Portée maximale (en blocs) pour le scan directionnel.",
+
+  "translocatorlocatorredux:config-tl-smallcone-cost": "Coût en durabilité (Mode directionnel court)",
+  "translocatorlocatorredux:config-tl-smallcone-costComment": "Coût en durabilité par utilisation pour ce mode de scan.",
+  "translocatorlocatorredux:config-tl-smallcone-range": "Portée (Mode directionnel court)",
+  "translocatorlocatorredux:config-tl-smallcone-rangeComment": "Portée maximale (en blocs) pour le scan directionnel court.",
+
+  "translocatorlocatorredux:config-tl-cubexs-cost": "Coût en durabilité (Mode radial très petit)",
+  "translocatorlocatorredux:config-tl-cubexs-costComment": "Coût en durabilité par utilisation pour ce mode de scan.",
+  "translocatorlocatorredux:config-tl-cubexs-range": "Rayon (Mode radial très petit)",
+  "translocatorlocatorredux:config-tl-cubexs-rangeComment": "Rayon (en blocs) du scan radial très petit.",
+
+  "translocatorlocatorredux:config-tl-cubes-cost": "Coût en durabilité (Mode radial petit)",
+  "translocatorlocatorredux:config-tl-cubes-costComment": "Coût en durabilité par utilisation pour ce mode de scan.",
+  "translocatorlocatorredux:config-tl-cubes-range": "Rayon (Mode radial petit)",
+  "translocatorlocatorredux:config-tl-cubes-rangeComment": "Rayon (en blocs) du scan radial petit.",
+
+  "translocatorlocatorredux:config-tl-cubem-cost": "Coût en durabilité (Mode radial moyen)",
+  "translocatorlocatorredux:config-tl-cubem-costComment": "Coût en durabilité par utilisation pour ce mode de scan.",
+  "translocatorlocatorredux:config-tl-cubem-range": "Rayon (Mode radial moyen)",
+  "translocatorlocatorredux:config-tl-cubem-rangeComment": "Rayon (en blocs) du scan radial moyen.",
+
+  "translocatorlocatorredux:config-tl-cubel-cost": "Coût en durabilité (Mode radial large)",
+  "translocatorlocatorredux:config-tl-cubel-costComment": "Coût en durabilité par utilisation pour ce mode de scan.",
+  "translocatorlocatorredux:config-tl-cubel-range": "Rayon (Mode radial large)",
+  "translocatorlocatorredux:config-tl-cubel-rangeComment": "Rayon (en blocs) du scan radial large.",
+
+  "translocatorlocatorredux:config-durability": "Durabilité maximale",
+  "translocatorlocatorredux:config-durabilityComment": "Durabilité maximale de l'objet. Mettre à 0 pour désactiver la durabilité (incassable).",
+
+  "translocatorlocatorredux:config-section-translocator-locator": "Paramètres du localisateur de translocateurs",
+  "translocatorlocatorredux:config-section-ancient-ruin-locator": "Paramètres du localisateur de ruines anciennes"
+}

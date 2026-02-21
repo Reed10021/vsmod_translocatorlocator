@@ -1,0 +1,104 @@
+{
+  "translocatorlocatorredux:smalldirectionalmode": "Small Directional Mode",
+  "translocatorlocatorredux:directionalmode": "Directional Mode",
+  "translocatorlocatorredux:extrasmallcubemode": "Extra Small Radial Mode",
+  "translocatorlocatorredux:smallcubemode": "Small Radial Mode",
+  "translocatorlocatorredux:mediumcubemode": "Medium Radial Mode",
+  "translocatorlocatorredux:largecubemode": "Large Radial Mode",
+
+  "translocatorlocatorredux:item-translocatorlocator": "Translocator Locator",
+  "translocatorlocatorredux:translocator_flavortext": "A suspiciously helpful little device. Makes finding Translocators much easier.",
+  "translocatorlocatorredux:translocator_cubenofound": "There are no broken translocators within #range blocks of that block.",
+  "translocatorlocatorredux:translocator_cubefoundlessthantwo": "There is #no broken translocator within #range blocks of that block.",
+  "translocatorlocatorredux:translocator_cubefoundmorethanone": "There are #no broken translocators within #range blocks of that block!",
+  "translocatorlocatorredux:translocator_conenofound": "There is no broken translocator within #range blocks #direction.",
+  "translocatorlocatorredux:translocator_conefoundlessthantwo": "There is #no broken translocator within #range blocks #direction.",
+  "translocatorlocatorredux:translocator_conefoundmorethanone": "There are #no broken translocators within #range blocks #direction!",
+
+  "translocatorlocatorredux:item-agedwoodlocator": "Ancient Ruin Locator",
+  "translocatorlocatorredux:agedwood_flavortext": "A suspiciously helpful little device. Makes finding ancient ruins much easier.",
+  "translocatorlocatorredux:agedwood_cubefoundnothing": "There are no ancient ruins within #range blocks of that block.",
+  "translocatorlocatorredux:agedwood_cubefoundsomething": "The device has found traces of ancient ruins within #range blocks of that block!",
+  "translocatorlocatorredux:agedwood_conefoundnothing": "There are no ancient ruins within #range blocks #direction.",
+  "translocatorlocatorredux:agedwood_conefoundsomething": "The device has found traces of ancient ruins within #range blocks #direction!",
+
+  "translocatorlocatorredux:locator_southofthatblock": "south of that block",
+  "translocatorlocatorredux:locator_westofthatblock": "west of that block",
+  "translocatorlocatorredux:locator_northofthatblock": "north of that block",
+  "translocatorlocatorredux:locator_eastofthatblock": "east of that block",
+  "translocatorlocatorredux:locator_belowthatblock": "below that block",
+  "translocatorlocatorredux:locator_abovethatblock": "above that block",
+  "translocatorlocatorredux:locator_somewherearoundthatblock": "somewhere around that block",
+
+  "translocatorlocatorredux:config-aw-use-cupronickel-plates": "Use Cupronickel Plates",
+  "translocatorlocatorredux:config-aw-use-cupronickel-platesComment": "If enabled, the crafting recipe uses cupronickel plates instead of iron plates. Requires a world/server restart.",
+
+  "translocatorlocatorredux:config-aw-cone-cost": "Directional Durability Cost",
+  "translocatorlocatorredux:config-aw-cone-costComment": "Durability cost per use for this scan mode.",
+  "translocatorlocatorredux:config-aw-cone-range": "Directional Range",
+  "translocatorlocatorredux:config-aw-cone-rangeComment": "Maximum range, in blocks, for the directional scan.",
+
+  "translocatorlocatorredux:config-aw-smallcone-cost": "Small Directional Durability Cost",
+  "translocatorlocatorredux:config-aw-smallcone-costComment": "Durability cost per use for this scan mode.",
+  "translocatorlocatorredux:config-aw-smallcone-range": "Small Directional Range",
+  "translocatorlocatorredux:config-aw-smallcone-rangeComment": "Maximum range, in blocks, for the short directional scan.",
+
+  "translocatorlocatorredux:config-aw-cubexs-cost": "Extra Small Radial Durability Cost",
+  "translocatorlocatorredux:config-aw-cubexs-costComment": "Durability cost per use for this scan mode.",
+  "translocatorlocatorredux:config-aw-cubexs-range": "Extra Small Radial Range",
+  "translocatorlocatorredux:config-aw-cubexs-rangeComment": "Radius, in blocks, of the extra small radial scan.",
+
+  "translocatorlocatorredux:config-aw-cubes-cost": "Small Radial Durability Cost",
+  "translocatorlocatorredux:config-aw-cubes-costComment": "Durability cost per use for this scan mode.",
+  "translocatorlocatorredux:config-aw-cubes-range": "Small Radial Range",
+  "translocatorlocatorredux:config-aw-cubes-rangeComment": "Radius, in blocks, of the small radial scan.",
+
+  "translocatorlocatorredux:config-aw-cubem-cost": "Medium Radial Durability Cost",
+  "translocatorlocatorredux:config-aw-cubem-costComment": "Durability cost per use for this scan mode.",
+  "translocatorlocatorredux:config-aw-cubem-range": "Medium Radial Range",
+  "translocatorlocatorredux:config-aw-cubem-rangeComment": "Radius, in blocks, of the medium radial scan.",
+
+  "translocatorlocatorredux:config-aw-cubel-cost": "Large Radial Durability Cost",
+  "translocatorlocatorredux:config-aw-cubel-costComment": "Durability cost per use for this scan mode.",
+  "translocatorlocatorredux:config-aw-cubel-range": "Large Radial Range",
+  "translocatorlocatorredux:config-aw-cubel-rangeComment": "Radius, in blocks, of the large radial scan.",
+
+  "translocatorlocatorredux:config-tl-use-cupronickel-plates": "Use Cupronickel Plates",
+  "translocatorlocatorredux:config-tl-use-cupronickel-platesComment": "If enabled, the crafting recipe uses cupronickel plates instead of iron plates. Requires a world/server restart.",
+
+  "translocatorlocatorredux:config-tl-cone-cost": "Directional Durability Cost",
+  "translocatorlocatorredux:config-tl-cone-costComment": "Durability cost per use for this scan mode.",
+  "translocatorlocatorredux:config-tl-cone-range": "Directional Range",
+  "translocatorlocatorredux:config-tl-cone-rangeComment": "Maximum range, in blocks, for the directional scan.",
+
+  "translocatorlocatorredux:config-tl-smallcone-cost": "Small Directional Durability Cost",
+  "translocatorlocatorredux:config-tl-smallcone-costComment": "Durability cost per use for this scan mode.",
+  "translocatorlocatorredux:config-tl-smallcone-range": "Small Directional Range",
+  "translocatorlocatorredux:config-tl-smallcone-rangeComment": "Maximum range, in blocks, for the short directional scan.",
+
+  "translocatorlocatorredux:config-tl-cubexs-cost": "Extra Small Radial Durability Cost",
+  "translocatorlocatorredux:config-tl-cubexs-costComment": "Durability cost per use for this scan mode.",
+  "translocatorlocatorredux:config-tl-cubexs-range": "Extra Small Radial Range",
+  "translocatorlocatorredux:config-tl-cubexs-rangeComment": "Radius, in blocks, of the extra small radial scan.",
+
+  "translocatorlocatorredux:config-tl-cubes-cost": "Small Radial Durability Cost",
+  "translocatorlocatorredux:config-tl-cubes-costComment": "Durability cost per use for this scan mode.",
+  "translocatorlocatorredux:config-tl-cubes-range": "Small Radial Range",
+  "translocatorlocatorredux:config-tl-cubes-rangeComment": "Radius, in blocks, of the small radial scan.",
+
+  "translocatorlocatorredux:config-tl-cubem-cost": "Medium Radial Durability Cost",
+  "translocatorlocatorredux:config-tl-cubem-costComment": "Durability cost per use for this scan mode.",
+  "translocatorlocatorredux:config-tl-cubem-range": "Medium Radial Range",
+  "translocatorlocatorredux:config-tl-cubem-rangeComment": "Radius, in blocks, of the medium radial scan.",
+
+  "translocatorlocatorredux:config-tl-cubel-cost": "Large Radial Durability Cost",
+  "translocatorlocatorredux:config-tl-cubel-costComment": "Durability cost per use for this scan mode.",
+  "translocatorlocatorredux:config-tl-cubel-range": "Large Radial Range",
+  "translocatorlocatorredux:config-tl-cubel-rangeComment": "Radius, in blocks, of the large radial scan.",
+
+  "translocatorlocatorredux:config-durability": "Maximum Durability",
+  "translocatorlocatorredux:config-durabilityComment": "Maximum durability of the item. Set to 0 to disable durability (unbreakable).",
+
+  "translocatorlocatorredux:config-section-translocator-locator": "Translocator Locator Settings",
+  "translocatorlocatorredux:config-section-ancient-ruin-locator": "Ancient Ruin Locator Settings"
+}

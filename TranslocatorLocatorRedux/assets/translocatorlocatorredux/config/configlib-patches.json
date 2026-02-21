@@ -1,0 +1,322 @@
+{
+  "version": 1.1,
+  "file": "TranslocatorLocatorRedux.json",
+  "settings": {
+    "integer": {
+      "TL_SMALLCONE_RANGE": {
+        "name": "TranslocatorLocatorSmallConeRange",
+        "ingui": "translocatorlocatorredux:config-tl-smallcone-range",
+        "comment": "translocatorlocatorredux:config-tl-smallcone-rangeComment",
+        "default": 10,
+        "range": {
+          "min": 1,
+          "max": 1024
+        },
+        "weight": 10
+      },
+      "TL_SMALLCONE_COST": {
+        "name": "TranslocatorLocatorSmallConeCost",
+        "ingui": "translocatorlocatorredux:config-tl-smallcone-cost",
+        "comment": "translocatorlocatorredux:config-tl-smallcone-costComment",
+        "default": 1,
+        "range": {
+          "min": 0,
+          "max": 9999
+        },
+        "weight": 11
+      },
+      "TL_CONE_RANGE": {
+        "name": "TranslocatorLocatorConeRange",
+        "ingui": "translocatorlocatorredux:config-tl-cone-range",
+        "comment": "translocatorlocatorredux:config-tl-cone-rangeComment",
+        "default": 50,
+        "range": {
+          "min": 1,
+          "max": 1024
+        },
+        "weight": 20
+      },
+      "TL_CONE_COST": {
+        "name": "TranslocatorLocatorConeCost",
+        "ingui": "translocatorlocatorredux:config-tl-cone-cost",
+        "comment": "translocatorlocatorredux:config-tl-cone-costComment",
+        "default": 4,
+        "range": {
+          "min": 0,
+          "max": 9999
+        },
+        "weight": 21
+      },
+      "TL_CUBEXS_RANGE": {
+        "name": "TranslocatorLocatorCubeExtraSmallRange",
+        "ingui": "translocatorlocatorredux:config-tl-cubexs-range",
+        "comment": "translocatorlocatorredux:config-tl-cubexs-rangeComment",
+        "default": 10,
+        "range": {
+          "min": 1,
+          "max": 1024
+        },
+        "weight": 30
+      },
+      "TL_CUBEXS_COST": {
+        "name": "TranslocatorLocatorCubeExtraSmallCost",
+        "ingui": "translocatorlocatorredux:config-tl-cubexs-cost",
+        "comment": "translocatorlocatorredux:config-tl-cubexs-costComment",
+        "default": 1,
+        "range": {
+          "min": 0,
+          "max": 9999
+        },
+        "weight": 31
+      },
+      "TL_CUBES_RANGE": {
+        "name": "TranslocatorLocatorCubeSmallRange",
+        "ingui": "translocatorlocatorredux:config-tl-cubes-range",
+        "comment": "translocatorlocatorredux:config-tl-cubes-rangeComment",
+        "default": 25,
+        "range": {
+          "min": 1,
+          "max": 1024
+        },
+        "weight": 40
+      },
+      "TL_CUBES_COST": {
+        "name": "TranslocatorLocatorCubeSmallCost",
+        "ingui": "translocatorlocatorredux:config-tl-cubes-cost",
+        "comment": "translocatorlocatorredux:config-tl-cubes-costComment",
+        "default": 2,
+        "range": {
+          "min": 0,
+          "max": 9999
+        },
+        "weight": 41
+      },
+      "TL_CUBEM_RANGE": {
+        "name": "TranslocatorLocatorCubeMediumRange",
+        "ingui": "translocatorlocatorredux:config-tl-cubem-range",
+        "comment": "translocatorlocatorredux:config-tl-cubem-rangeComment",
+        "default": 75,
+        "range": {
+          "min": 1,
+          "max": 1024
+        },
+        "weight": 50
+      },
+      "TL_CUBEM_COST": {
+        "name": "TranslocatorLocatorCubeMediumCost",
+        "ingui": "translocatorlocatorredux:config-tl-cubem-cost",
+        "comment": "translocatorlocatorredux:config-tl-cubem-costComment",
+        "default": 10,
+        "range": {
+          "min": 0,
+          "max": 9999
+        },
+        "weight": 51
+      },
+      "TL_CUBEL_RANGE": {
+        "name": "TranslocatorLocatorCubeLargeRange",
+        "ingui": "translocatorlocatorredux:config-tl-cubel-range",
+        "comment": "translocatorlocatorredux:config-tl-cubel-rangeComment",
+        "default": 150,
+        "range": {
+          "min": 1,
+          "max": 1024
+        },
+        "weight": 60
+      },
+      "TL_CUBEL_COST": {
+        "name": "TranslocatorLocatorCubeLargeCost",
+        "ingui": "translocatorlocatorredux:config-tl-cubel-cost",
+        "comment": "translocatorlocatorredux:config-tl-cubel-costComment",
+        "default": 25,
+        "range": {
+          "min": 0,
+          "max": 9999
+        },
+        "weight": 61
+      },
+      "AW_SMALLCONE_RANGE": {
+        "name": "AgedWoodLocatorSmallConeRange",
+        "ingui": "translocatorlocatorredux:config-aw-smallcone-range",
+        "comment": "translocatorlocatorredux:config-aw-smallcone-rangeComment",
+        "default": 10,
+        "range": {
+          "min": 1,
+          "max": 1024
+        },
+        "weight": 110
+      },
+      "AW_SMALLCONE_COST": {
+        "name": "AgedWoodLocatorSmallConeCost",
+        "ingui": "translocatorlocatorredux:config-aw-smallcone-cost",
+        "comment": "translocatorlocatorredux:config-aw-smallcone-costComment",
+        "default": 1,
+        "range": {
+          "min": 0,
+          "max": 9999
+        },
+        "weight": 111
+      },
+      "AW_CONE_RANGE": {
+        "name": "AgedWoodLocatorConeRange",
+        "ingui": "translocatorlocatorredux:config-aw-cone-range",
+        "comment": "translocatorlocatorredux:config-aw-cone-rangeComment",
+        "default": 50,
+        "range": {
+          "min": 1,
+          "max": 1024
+        },
+        "weight": 120
+      },
+      "AW_CONE_COST": {
+        "name": "AgedWoodLocatorConeCost",
+        "ingui": "translocatorlocatorredux:config-aw-cone-cost",
+        "comment": "translocatorlocatorredux:config-aw-cone-costComment",
+        "default": 4,
+        "range": {
+          "min": 0,
+          "max": 9999
+        },
+        "weight": 121
+      },
+      "AW_CUBEXS_RANGE": {
+        "name": "AgedWoodLocatorCubeExtraSmallRange",
+        "ingui": "translocatorlocatorredux:config-aw-cubexs-range",
+        "comment": "translocatorlocatorredux:config-aw-cubexs-rangeComment",
+        "default": 10,
+        "range": {
+          "min": 1,
+          "max": 1024
+        },
+        "weight": 130
+      },
+      "AW_CUBEXS_COST": {
+        "name": "AgedWoodLocatorCubeExtraSmallCost",
+        "ingui": "translocatorlocatorredux:config-aw-cubexs-cost",
+        "comment": "translocatorlocatorredux:config-aw-cubexs-costComment",
+        "default": 1,
+        "range": {
+          "min": 0,
+          "max": 9999
+        },
+        "weight": 131
+      },
+      "AW_CUBES_RANGE": {
+        "name": "AgedWoodLocatorCubeSmallRange",
+        "ingui": "translocatorlocatorredux:config-aw-cubes-range",
+        "comment": "translocatorlocatorredux:config-aw-cubes-rangeComment",
+        "default": 25,
+        "range": {
+          "min": 1,
+          "max": 1024
+        },
+        "weight": 140
+      },
+      "AW_CUBES_COST": {
+        "name": "AgedWoodLocatorCubeSmallCost",
+        "ingui": "translocatorlocatorredux:config-aw-cubes-cost",
+        "comment": "translocatorlocatorredux:config-aw-cubes-costComment",
+        "default": 2,
+        "range": {
+          "min": 0,
+          "max": 9999
+        },
+        "weight": 141
+      },
+      "AW_CUBEM_RANGE": {
+        "name": "AgedWoodLocatorCubeMediumRange",
+        "ingui": "translocatorlocatorredux:config-aw-cubem-range",
+        "comment": "translocatorlocatorredux:config-aw-cubem-rangeComment",
+        "default": 75,
+        "range": {
+          "min": 1,
+          "max": 1024
+        },
+        "weight": 150
+      },
+      "AW_CUBEM_COST": {
+        "name": "AgedWoodLocatorCubeMediumCost",
+        "ingui": "translocatorlocatorredux:config-aw-cubem-cost",
+        "comment": "translocatorlocatorredux:config-aw-cubem-costComment",
+        "default": 10,
+        "range": {
+          "min": 0,
+          "max": 9999
+        },
+        "weight": 151
+      },
+      "AW_CUBEL_RANGE": {
+        "name": "AgedWoodLocatorCubeLargeRange",
+        "ingui": "translocatorlocatorredux:config-aw-cubel-range",
+        "comment": "translocatorlocatorredux:config-aw-cubel-rangeComment",
+        "default": 150,
+        "range": {
+          "min": 1,
+          "max": 1024
+        },
+        "weight": 160
+      },
+      "AW_CUBEL_COST": {
+        "name": "AgedWoodLocatorCubeLargeCost",
+        "ingui": "translocatorlocatorredux:config-aw-cubel-cost",
+        "comment": "translocatorlocatorredux:config-aw-cubel-costComment",
+        "default": 25,
+        "range": {
+          "min": 0,
+          "max": 9999
+        },
+        "weight": 161
+      },
+      "TL_DURABILITY": {
+        "name": "TranslocatorLocatorDurability",
+        "ingui": "translocatorlocatorredux:config-durability",
+        "comment": "translocatorlocatorredux:config-durabilityComment",
+        "default": 1500,
+        "range": {
+          "min": 0,
+          "max": 1000000
+        },
+        "weight": 6
+      },
+      "AW_DURABILITY": {
+        "name": "AgedWoodLocatorDurability",
+        "ingui": "translocatorlocatorredux:config-durability",
+        "comment": "translocatorlocatorredux:config-durabilityComment",
+        "default": 1500,
+        "range": {
+          "min": 0,
+          "max": 1000000
+        },
+        "weight": 106
+      }
+    },
+    "boolean": {
+      "TL_USE_CUPRONICKEL_PLATES": {
+        "name": "TranslocatorLocatorUseCupronickelPlates",
+        "ingui": "translocatorlocatorredux:config-tl-use-cupronickel-plates",
+        "comment": "translocatorlocatorredux:config-tl-use-cupronickel-platesComment",
+        "default": false,
+        "weight": 5
+      },
+      "AW_USE_CUPRONICKEL_PLATES": {
+        "name": "AgedWoodLocatorUseCupronickelPlates",
+        "ingui": "translocatorlocatorredux:config-aw-use-cupronickel-plates",
+        "comment": "translocatorlocatorredux:config-aw-use-cupronickel-platesComment",
+        "default": false,
+        "weight": 105
+      }
+    }
+  },
+  "formatting": [
+    {
+      "type": "separator",
+      "title": "translocatorlocatorredux:config-section-translocator-locator",
+      "weight": 4.0
+    },
+    {
+      "type": "separator",
+      "title": "translocatorlocatorredux:config-section-ancient-ruin-locator",
+      "weight": 104.0
+    }
+  ]
+}
