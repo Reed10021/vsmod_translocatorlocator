@@ -80,10 +80,14 @@ namespace TranslocatorLocatorRedux.ModSystem
         {
             base.AssetsLoaded(api);
 
+            // Retry here in case StartPre/Start ran before ConfigLib's ModSystem was available
+            TrySubscribeToConfigLib(api);
+
+            // If client side, we're done here.
             if (api.Side != EnumAppSide.Server) return;
 
             // Ensure ConfigLib has had a chance to apply its stored values before we patch recipes.
-            OnConfigLibConfigsLoaded(api);
+            OnConfigLibConfigsLoaded();
 
             PatchRecipeMetalPlates(api, "recipes/grid/translocatorlocator.json", ModConfig.Current.TranslocatorLocatorUseCupronickelPlates);
             PatchRecipeMetalPlates(api, "recipes/grid/agedwoodlocator.json", ModConfig.Current.AgedWoodLocatorUseCupronickelPlates);
@@ -169,7 +173,7 @@ namespace TranslocatorLocatorRedux.ModSystem
             }
         }
 
-        private void PatchRecipeMetalPlates(ICoreAPI api, string recipeAssetPath, bool useCupronickelPlates)
+        private static void PatchRecipeMetalPlates(ICoreAPI api, string recipeAssetPath, bool useCupronickelPlates)
         {
             var desired = useCupronickelPlates ? CupronickelPlateCode : IronPlateCode;
             var loc = new AssetLocation(Domain, recipeAssetPath);
@@ -188,18 +192,20 @@ namespace TranslocatorLocatorRedux.ModSystem
 
                 void PatchIngredients(JObject recipe)
                 {
-                    var ingredients = recipe["ingredients"] as JObject;
-                    if (ingredients == null) return;
+                    if (recipe["ingredients"] is not JObject ingredients) 
+                        return;
 
                     foreach (var prop in ingredients.Properties())
                     {
-                        var ingObj = prop.Value as JObject;
-                        if (ingObj == null) continue;
+                        if (prop.Value is not JObject ingObj) 
+                            continue;
                         var codeToken = ingObj["code"];
-                        if (codeToken == null || codeToken.Type != JTokenType.String) continue;
+                        if (codeToken == null || codeToken.Type != JTokenType.String) 
+                            continue;
 
                         var code = codeToken.Value<string>();
-                        if (code != IronPlateCode && code != CupronickelPlateCode) continue;
+                        if (code != IronPlateCode && code != CupronickelPlateCode) 
+                            continue;
 
                         if (code != desired)
                         {
@@ -272,6 +278,7 @@ namespace TranslocatorLocatorRedux.ModSystem
                     catch (Exception e)
                     {
                         api.Logger.Warning($"[{Domain}] Failed to hook ConfigLib SettingChanged: {e}");
+                        return;
                     }
                 }
             }
@@ -291,6 +298,7 @@ namespace TranslocatorLocatorRedux.ModSystem
                     catch (Exception e)
                     {
                         api.Logger.Warning($"[{Domain}] Failed to hook ConfigLib ConfigsLoaded: {e}");
+                        return;
                     }
                 }
             }
@@ -299,6 +307,7 @@ namespace TranslocatorLocatorRedux.ModSystem
         }
 
         // This signature is deliberately broad so we can create the delegate without a hard reference.
+#pragma warning disable IDE0060 // Remove unused parameter
         private void OnConfigLibSettingChanged(string domain, object _config, object setting)
         {
             if (!string.Equals(domain, Domain, StringComparison.OrdinalIgnoreCase)) return;
@@ -306,8 +315,8 @@ namespace TranslocatorLocatorRedux.ModSystem
             try
             {
                 // ConfigLib.ConfigSetting.AssignSettingValue(object target)
-                var assign = setting.GetType().GetMethod("AssignSettingValue", new[] { typeof(object) });
-                assign?.Invoke(setting, new object[] { ModConfig.Current });
+                var assign = setting.GetType().GetMethod("AssignSettingValue", [typeof(object)]);
+                assign?.Invoke(setting, [ModConfig.Current]);
             }
             catch
             {
@@ -320,20 +329,21 @@ namespace TranslocatorLocatorRedux.ModSystem
             // If this happened on the server, push the updated config to connected clients.
             BroadcastConfigToAllPlayers();
         }
+#pragma warning restore IDE0060 // Remove unused parameter
 
-        private void OnConfigLibConfigsLoaded(ICoreAPI api)
+        private void OnConfigLibConfigsLoaded()
         {
             try
             {
                 if (configLibModSystem == null) return;
 
                 var systemType = configLibModSystem.GetType();
-                var getConfig = systemType.GetMethod("GetConfig", new[] { typeof(string) });
-                var cfg = getConfig?.Invoke(configLibModSystem, new object[] { Domain });
+                var getConfig = systemType.GetMethod("GetConfig", [typeof(string)]);
+                var cfg = getConfig?.Invoke(configLibModSystem, [Domain]);
                 if (cfg == null) return;
 
-                var assignAll = cfg.GetType().GetMethod("AssignSettingsValues", new[] { typeof(object) });
-                assignAll?.Invoke(cfg, new object[] { ModConfig.Current });
+                var assignAll = cfg.GetType().GetMethod("AssignSettingsValues", [typeof(object)]);
+                assignAll?.Invoke(cfg, [ModConfig.Current]);
             }
             catch
             {
