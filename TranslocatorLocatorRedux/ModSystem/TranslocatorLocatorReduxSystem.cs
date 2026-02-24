@@ -140,9 +140,6 @@ namespace TranslocatorLocatorRedux.ModSystem
                     ModConfig.LoadSettingsJson(packet.Data);
                     ModConfig.Current.Normalize();
                 });
-
-            // Ask the server for its config
-            clientChannel.SendPacket(new ConfigRequestPacket());
         }
 
         private void OnPlayerNowPlaying(IServerPlayer byPlayer)
