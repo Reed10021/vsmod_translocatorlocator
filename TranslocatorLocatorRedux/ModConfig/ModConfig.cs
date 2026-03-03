@@ -127,12 +127,14 @@ namespace TranslocatorLocatorRedux.ModConfig
         /// </summary>
         public static void LoadSettingsJson(string json)
         {
-            if (string.IsNullOrWhiteSpace(json)) return;
+            if (string.IsNullOrWhiteSpace(json))
+                return;
 
             try
             {
                 var cfg = JsonConvert.DeserializeObject<ModConfig>(json);
-                if (cfg == null) return;
+                if (cfg == null)
+                    return;
                 cfg.Normalize();
                 Current = cfg;
             }

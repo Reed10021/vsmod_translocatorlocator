@@ -24,7 +24,8 @@ namespace TranslocatorLocatorRedux.ModSystem.Item
                 1 => Lang.Get("translocatorlocatorredux:translocator_cubefoundlessthantwo"),
                 _ => Lang.Get("translocatorlocatorredux:translocator_cubefoundmorethanone"),
             };
-            capi.ShowChatMessage(message.Replace("#no", count.ToString(CultureInfo.InvariantCulture)).Replace("#range", "" + range));
+            capi.ShowChatMessage(message.Replace("#no", count.ToString(CultureInfo.InvariantCulture)).Replace("#range", "" + range*2));
+            // range is a radius, so for the chat description to be correct we need to double it.
         }
 
         protected override void PrintConeSearchResults(int count, int range, int direction, ICoreClientAPI capi)

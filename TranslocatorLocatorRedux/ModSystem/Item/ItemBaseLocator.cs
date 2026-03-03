@@ -1,18 +1,16 @@
 namespace TranslocatorLocatorRedux.ModSystem.Item
 {
+    using Cairo;
     using System;
     using System.Text;
-    using Cairo;
+    using TranslocatorLocatorRedux.ModConfig;
+    using TranslocatorLocatorRedux.ModSystem.Proto;
     using Vintagestory.API.Client;
     using Vintagestory.API.Common;
     using Vintagestory.API.Config;
     using Vintagestory.API.MathTools;
     using Vintagestory.API.Server;
     using Vintagestory.API.Util;
-#pragma warning disable IDE0005
-    using System.Linq;
-    using TranslocatorLocatorRedux.ModConfig;
-#pragma warning restore IDE0005
 
     public abstract class ItemBaseLocator : Item
     {
@@ -30,7 +28,7 @@ namespace TranslocatorLocatorRedux.ModSystem.Item
         /// </summary>
         public override int GetMaxDurability(ItemStack itemstack)
         {
-            var cfg = ModConfig.Current ?? new ModConfig();
+            var cfg = ModConfig.Current;
             return Kind == LocatorKind.Translocator ? cfg.TranslocatorLocatorDurability : cfg.AgedWoodLocatorDurability;
         }
 
@@ -40,7 +38,7 @@ namespace TranslocatorLocatorRedux.ModSystem.Item
         protected abstract bool ShouldSearchReturnEarly();
         protected abstract string GetFlavorText();
 
-        private static LocatorMode ModeFromToolMode(int toolMode)
+        internal static LocatorMode ModeFromToolMode(int toolMode)
         {
             return toolMode switch
             {
@@ -53,48 +51,148 @@ namespace TranslocatorLocatorRedux.ModSystem.Item
                 _ => LocatorMode.SmallCone,
             };
         }
+
         public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
         {
-            if (byEntity is EntityPlayer)
+            if (byEntity is not EntityPlayer || blockSel == null || !firstEvent)
+                return;
+
+            handling = EnumHandHandling.PreventDefaultAction;
+
+            if (byEntity.Api.Side != EnumAppSide.Client)
+                return;
+
+            if (byEntity.Api is not ICoreClientAPI capi)
+                return;
+
+            var invMan = ((EntityPlayer)byEntity).Player.InventoryManager;
+            var hotbarSlotNum = invMan?.ActiveHotbarSlotNumber ?? 0;
+            var itemCode = slot.Itemstack.Collectible.Code.ToString();
+            var system = capi.ModLoader.GetModSystem<TranslocatorLocatorReduxSystem>();
+            if(system != null)
             {
-                if (blockSel != null && firstEvent)
+                if(system.SendScanRequest(blockSel.Position, blockSel.Face.Index, hotbarSlotNum, itemCode))
                 {
-                    var player = byEntity.World.PlayerByUid((byEntity as EntityPlayer)?.PlayerUID);
-                    var toolMode = this.GetToolMode(slot, player, blockSel);
-                    var modConfig = ModConfig.Current;
-
-                    var locatorMode = ModeFromToolMode(toolMode);
-                    var range = modConfig.GetRange(Kind, locatorMode);
-                    var cost = modConfig.GetCost(Kind, locatorMode);
-
-                    if (byEntity.Api.Side == EnumAppSide.Server)
-                    {
-                        ApplyDurabilityDamageServer(cost, slot, byEntity);
-                    }
-                    else
-                    {
-                        switch (toolMode)
-                        {
-                            case 0:
-                            case 1:
-                                this.ExecuteConeSearch(range, cost, slot, byEntity, blockSel);
-                                break;
-                            case 2:
-                            case 3:
-                            case 4:
-                            case 5:
-                                this.ExecuteCubeSearch(range, cost, slot, byEntity, blockSel);
-                                break;
-                            default:
-                                var capi = byEntity.Api as ICoreClientAPI;
-                                capi?.ShowChatMessage("Unsupported tool mode!");
-                                break;
-                        }
-                        SpawnParticles(blockSel, byEntity);
-                    }
-                    handling = EnumHandHandling.PreventDefaultAction;
+                    // Cosmetic feedback 
+                    SpawnParticles(blockSel, byEntity);
                 }
             }
+        }
+
+        internal bool TryExecuteScanServer(IServerPlayer player, ItemSlot slot, BlockPos center, int faceIndex,
+            out int count, out int range, out int toolMode, out int durabilityCost)
+        {
+            count = 0;
+            range = 0;
+            toolMode = 0;
+            durabilityCost = 0;
+            BlockSelection blockSelection = new();
+
+            if (player == null || slot.Itemstack == null)
+                return false;
+
+            toolMode = GetToolMode(slot, player, blockSelection);
+            var locatorMode = ModeFromToolMode(toolMode);
+
+            var cfg = ModConfig.Current;
+            range = cfg.GetRange(Kind, locatorMode);
+            durabilityCost = cfg.GetCost(Kind, locatorMode);
+
+            if (toolMode <= 1)
+                count = CountConeMatches(player.Entity.World, center, faceIndex, range);
+            else
+                count = CountCubeMatches(player.Entity.World, center, range);
+
+            return true;
+        }
+
+        internal void HandleScanResultClient(ScanResultPacket packet, ICoreClientAPI capi, EntityAgent byEntity)
+        {
+            if (packet == null || capi == null || byEntity == null)
+                return;
+
+            if (packet.ToolMode == 0 || packet.ToolMode == 1)
+                PrintConeSearchResults(packet.Count, packet.Range, packet.FaceIndex, capi);
+            else
+                PrintCubeSearchResults(packet.Count, packet.Range, capi);
+
+            PlaySound(packet.Count > 0, byEntity);
+        }
+
+        internal static void DamageItemIfEnabled(IWorldAccessor world, EntityAgent byEntity, ItemSlot slot, int durabilityDamage)
+        {
+            if (durabilityDamage <= 0 || slot.Itemstack == null)
+                return;
+
+            // 0 = unbreakable
+            var maxDurability = slot.Itemstack.Collectible.GetMaxDurability(slot.Itemstack);
+            if (maxDurability <= 0)
+                return;
+
+            slot.Itemstack.Collectible.DamageItem(world, byEntity, slot, durabilityDamage);
+            slot.MarkDirty();
+        }
+
+        protected virtual int CountCubeMatches(IWorldAccessor world, BlockPos center, int range)
+        {
+            var minY = 0;
+            var maxY = world.BlockAccessor.MapSizeY;
+
+            return SearchCubeArea(world,
+                new BlockPos(center.X - range, Math.Clamp(center.Y - range, minY, maxY), center.Z - range),
+                new BlockPos(center.X + range, Math.Clamp(center.Y + range, minY, maxY), center.Z + range));
+        }
+
+        protected virtual int CountConeMatches(IWorldAccessor world, BlockPos center, int direction, int range)
+        {
+            var count = 0;
+
+            var xMin = center.X;
+            var xMax = center.X;
+            var yMin = center.Y;
+            var yMax = center.Y;
+            var zMin = center.Z;
+            var zMax = center.Z;
+
+            for (var distance = 0; distance <= range && !(ShouldSearchReturnEarly() && count > 0); distance++)
+            {
+                var diameter = distance;
+                switch (direction)
+                {
+                    case 0: // North
+                        xMin = center.X - diameter; xMax = center.X + diameter;
+                        yMin = center.Y - diameter; yMax = center.Y + diameter;
+                        zMin = center.Z + distance; zMax = center.Z + distance;
+                        break;
+                    case 1: // East
+                        xMin = center.X - distance; xMax = center.X - distance;
+                        yMin = center.Y - diameter; yMax = center.Y + diameter;
+                        zMin = center.Z - diameter; zMax = center.Z + diameter;
+                        break;
+                    case 2: // South
+                        xMin = center.X - diameter; xMax = center.X + diameter;
+                        yMin = center.Y - diameter; yMax = center.Y + diameter;
+                        zMin = center.Z - distance; zMax = center.Z - distance;
+                        break;
+                    case 3: // West
+                        xMin = center.X + distance; xMax = center.X + distance;
+                        yMin = center.Y - diameter; yMax = center.Y + diameter;
+                        zMin = center.Z - diameter; zMax = center.Z + diameter;
+                        break;
+                    case 4: // Up
+                        xMin = center.X - diameter; xMax = center.X + diameter;
+                        yMin = center.Y - distance; yMax = center.Y - distance;
+                        zMin = center.Z - diameter; zMax = center.Z + diameter;
+                        break;
+                    case 5: // Down
+                        xMin = center.X - diameter; xMax = center.X + diameter;
+                        yMin = center.Y + distance; yMax = center.Y + distance;
+                        zMin = center.Z - diameter; zMax = center.Z + diameter;
+                        break;
+                }
+                count += SearchCubeArea(world, new BlockPos(xMin, yMin, zMin), new BlockPos(xMax, yMax, zMax));
+            }
+            return count;
         }
 
         public override void OnLoaded(ICoreAPI api)
@@ -139,6 +237,7 @@ namespace TranslocatorLocatorRedux.ModSystem.Item
         public override void SetToolMode(ItemSlot slot, IPlayer byPlayer, BlockSelection blockSelection, int toolMode)
         {
             slot.Itemstack.Attributes.SetInt("toolMode", toolMode);
+            slot.MarkDirty();
         }
 
         public override void OnUnloaded(ICoreAPI api)
@@ -161,164 +260,21 @@ namespace TranslocatorLocatorRedux.ModSystem.Item
             }
         }
 
-        private void ExecuteConeSearch(int range, int durabilityDamage, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel)
-        {
-            var direction = blockSel.Face.Index;
-            var count = 0;
-
-            var xMin = blockSel.Position.X;
-            var xMax = blockSel.Position.X;
-            var yMin = blockSel.Position.Y;
-            var yMax = blockSel.Position.Y;
-            var zMin = blockSel.Position.Z;
-            var zMax = blockSel.Position.Z;
-
-            for (var distance = 0; distance <= range && !(this.ShouldSearchReturnEarly() && count > 0); distance++)
-            {
-                var diameter = distance; // just for readability
-
-                switch (direction)
-                {
-                    // North
-                    case 0:
-                        xMin = blockSel.Position.X - diameter;
-                        xMax = blockSel.Position.X + diameter;
-                        yMin = blockSel.Position.Y - diameter;
-                        yMax = blockSel.Position.Y + diameter;
-                        zMin = blockSel.Position.Z + distance;
-                        zMax = blockSel.Position.Z + distance;
-                        break;
-                    // East
-                    case 1:
-                        xMin = blockSel.Position.X - distance;
-                        xMax = blockSel.Position.X - distance;
-                        yMin = blockSel.Position.Y - diameter;
-                        yMax = blockSel.Position.Y + diameter;
-                        zMin = blockSel.Position.Z - diameter;
-                        zMax = blockSel.Position.Z + diameter;
-                        break;
-                    // South
-                    case 2:
-                        xMin = blockSel.Position.X - diameter;
-                        xMax = blockSel.Position.X + diameter;
-                        yMin = blockSel.Position.Y - diameter;
-                        yMax = blockSel.Position.Y + diameter;
-                        zMin = blockSel.Position.Z - distance;
-                        zMax = blockSel.Position.Z - distance;
-                        break;
-                    // West
-                    case 3:
-                        xMin = blockSel.Position.X + distance;
-                        xMax = blockSel.Position.X + distance;
-                        yMin = blockSel.Position.Y - diameter;
-                        yMax = blockSel.Position.Y + diameter;
-                        zMin = blockSel.Position.Z - diameter;
-                        zMax = blockSel.Position.Z + diameter;
-                        break;
-                    // Up
-                    case 4:
-                        xMin = blockSel.Position.X - diameter;
-                        xMax = blockSel.Position.X + diameter;
-                        yMin = blockSel.Position.Y - distance;
-                        yMax = blockSel.Position.Y - distance;
-                        zMin = blockSel.Position.Z - diameter;
-                        zMax = blockSel.Position.Z + diameter;
-                        break;
-                    // Down
-                    case 5:
-                        xMin = blockSel.Position.X - diameter;
-                        xMax = blockSel.Position.X + diameter;
-                        yMin = blockSel.Position.Y + distance;
-                        yMax = blockSel.Position.Y + distance;
-                        zMin = blockSel.Position.Z - diameter;
-                        zMax = blockSel.Position.Z + diameter;
-                        break;
-                    default:
-                        break;
-                }
-                count += this.SearchCubeArea(byEntity.World, new BlockPos(xMin, yMin, zMin), new BlockPos(xMax, yMax, zMax));
-            }
-
-            if (byEntity.Api is ICoreClientAPI capi)
-            {
-                this.PrintConeSearchResults(count, range, blockSel.Face.Index, capi);
-                PlaySound(count > 0, byEntity);
-                if (capi.IsSinglePlayer)
-                {
-                    ApplyDurabilityDamageClient(durabilityDamage, slot, byEntity);
-                }
-            }
-        }
-
-        private int SearchCubeArea(IWorldAccessor world, BlockSelection blockSel, int range)
-        {
-            return this.SearchCubeArea(world,
-                new BlockPos(blockSel.Position.X - range,
-                            blockSel.Position.Y - range,
-                            blockSel.Position.Z - range),
-                new BlockPos(blockSel.Position.X + range,
-                            blockSel.Position.Y + range,
-                            blockSel.Position.Z + range));
-        }
-
         protected int SearchCubeArea(IWorldAccessor world, BlockPos lowerCorner, BlockPos upperCorner)
         {
             var count = 0;
             world.BlockAccessor.SearchBlocks(lowerCorner, upperCorner, (block, pos) =>
             {
                 if (this.IsSearchedBlock(block))
-                {
                     count++;
-                }
                 return true;
             });
             return count;
         }
 
-        private void ExecuteCubeSearch(int range, int durabilityDamage, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel)
-        {
-            var count = this.SearchCubeArea(byEntity.World, blockSel, range);
-
-            if (byEntity.Api is ICoreClientAPI capi)
-            {
-                this.PrintCubeSearchResults(count, range, capi);
-                PlaySound(count > 0, byEntity);
-                if (capi.IsSinglePlayer)
-                {
-                    ApplyDurabilityDamageClient(durabilityDamage, slot, byEntity);
-                }
-            }
-        }
-
-        private static void ApplyDurabilityDamageServer(int durabilityDamage, ItemSlot slot, EntityAgent byEntity)
-        {
-            if (slot != null && slot.Itemstack != null)
-            {
-                var capi = byEntity.Api as ICoreServerAPI;
-                var world = capi?.World as IWorldAccessor;
-                var serverplayer = world?.PlayerByUid((byEntity as EntityPlayer)?.PlayerUID) as IServerPlayer;
-
-                slot.Itemstack.Collectible.DamageItem(world, byEntity, slot, durabilityDamage);
-                slot.MarkDirty();
-            }
-        }
-
-        private static void ApplyDurabilityDamageClient(int durabilityDamage, ItemSlot slot, EntityAgent byEntity)
-        {
-            if (slot != null && slot.Itemstack != null)
-            {
-                var capi = byEntity.Api as ICoreClientAPI;
-                var world = capi?.World as IWorldAccessor;
-                var player = world?.PlayerByUid((byEntity as EntityPlayer)?.PlayerUID);
-
-                slot.Itemstack.Collectible.DamageItem(world, byEntity, slot, durabilityDamage);
-                slot.MarkDirty();
-            }
-        }
-
         private static void SpawnParticles(BlockSelection blockSel, EntityAgent byEntity)
         {
-            var byPlayer = (byEntity as EntityPlayer)?.Player;
+            var byPlayer = ((EntityPlayer)byEntity).Player;
             var pos = blockSel.Position.ToVec3d().Add(blockSel.HitPosition.ToVec3f().ToVec3d());
             byEntity.World.SpawnCubeParticles(blockSel.Position, pos, 0.5f, 8, 0.7f, byPlayer);
         }
@@ -326,13 +282,9 @@ namespace TranslocatorLocatorRedux.ModSystem.Item
         private static void PlaySound(bool found, EntityAgent byEntity)
         {
             if (found)
-            {
                 PlaySoundFound(byEntity);
-            }
             else
-            {
                 PlaySoundNotFound(byEntity);
-            }
         }
 
         private static void PlaySoundNotFound(EntityAgent byEntity)
@@ -344,7 +296,7 @@ namespace TranslocatorLocatorRedux.ModSystem.Item
         private static void PlaySoundFound(EntityAgent byEntity)
         {
             var pos = byEntity.Pos;
-            byEntity.World.PlaySoundAt(new AssetLocation("sounds/tool/reinforce"), pos.X, pos.Y, pos.Z, null);
+            byEntity.World.PlaySoundAt(new AssetLocation("sounds/player/projectilehit"), pos.X, pos.Y, pos.Z, null);
         }
 
         public override void GetHeldItemInfo(ItemSlot inSlot, StringBuilder dsc, IWorldAccessor world, bool withDebugInfo)
